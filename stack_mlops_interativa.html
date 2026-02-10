@@ -1,0 +1,2294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack MLOps - Plataforma Unificada de IA e ML</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+            background: linear-gradient(180deg, #fafbfc 0%, #f5f7fa 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #1a202c;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: left;
+            color: #0f172a;
+            margin-bottom: 32px;
+            padding: 32px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(168, 85, 247, 0.03) 100%);
+            border-radius: 12px;
+            border-left: 4px solid #6366f1;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.02em;
+        }
+
+        header p {
+            font-size: 1em;
+            color: #64748b;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .stack {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .layer {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #6366f1;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .layer:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 8px 24px rgba(99, 102, 241, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .layer-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f1f5f9;
+            position: relative;
+        }
+
+        .layer-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+        }
+
+        .layer-icon {
+            width: 28px;
+            height: 28px;
+            margin-right: 14px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+        }
+
+        .layer-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: #ffffff;
+        }
+
+        .layer-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.01em;
+        }
+
+        .categories {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .category {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(241, 245, 249, 0.8);
+        }
+
+        .category:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .category:first-child {
+            padding-top: 0;
+        }
+
+        .category-name {
+            font-weight: 600;
+            font-size: 0.875em;
+            margin-bottom: 14px;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .category-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+
+        .category-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: #718096;
+        }
+
+        .tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .tool-badge {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            color: #334155;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.875em;
+            font-weight: 500;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Courier New', monospace;
+            border: 1.5px solid #e2e8f0;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: -1;
+        }
+
+        .tool-badge:hover {
+            color: #ffffff;
+            border-color: #6366f1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .tool-badge:hover::before {
+            opacity: 1;
+        }
+
+        /* Accent color consistente */
+
+        /* Scrollbar styling para navegadores webkit */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #4f46e5 0%, #7c3aed 100%);
+        }
+
+        /* Selection color */
+        ::selection {
+            background: rgba(99, 102, 241, 0.2);
+            color: #0f172a;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(99, 102, 241, 0.15) 100%);
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 0 1px rgba(99, 102, 241, 0.1);
+            border: 1px solid #f1f5f9;
+        }
+
+        .close {
+            color: #94a3b8;
+            float: right;
+            font-size: 28px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            line-height: 1;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .close:hover {
+            color: #0f172a;
+            background: #f1f5f9;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f1f5f9;
+            position: relative;
+        }
+
+        .modal-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+        }
+
+        .modal-title {
+            font-size: 1.9em;
+            color: #0f172a;
+            font-weight: 700;
+            flex: 1;
+            letter-spacing: -0.02em;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        }
+
+        .modal-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+            border-radius: 12px;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .metric {
+            text-align: center;
+            padding: 12px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #f1f5f9;
+        }
+
+        .metric-value {
+            font-size: 1.6em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .metric-label {
+            font-size: 0.85em;
+            color: #718096;
+            margin-top: 5px;
+        }
+
+        .modal-section {
+            margin: 20px 0;
+        }
+
+        .modal-section h3 {
+            color: #0f172a;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .modal-section p, .modal-section ul {
+            color: #475569;
+            line-height: 1.7;
+            font-size: 0.975em;
+        }
+
+        .modal-section ul {
+            padding-left: 20px;
+        }
+
+        .modal-section li {
+            margin: 8px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-left: 12px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-30px) scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 16px;
+            }
+
+            header {
+                padding: 24px 20px;
+            }
+
+            header h1 {
+                font-size: 1.75em;
+            }
+
+            .layer {
+                padding: 24px 20px;
+                border-left-width: 3px;
+            }
+
+            .tool-badge {
+                padding: 7px 12px;
+                font-size: 0.825em;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                padding: 28px 20px;
+                max-width: 95%;
+                border-radius: 12px;
+            }
+
+            .modal-title {
+                font-size: 1.5em;
+            }
+        }
+
+        .legend {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(147, 51, 234, 0.05) 100%);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 32px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-left: 4px solid #6366f1;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(99, 102, 241, 0.08);
+        }
+
+        .legend-title {
+            font-weight: 700;
+            font-size: 1em;
+            margin-bottom: 10px;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            letter-spacing: -0.01em;
+        }
+
+        .legend-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3px;
+        }
+
+        .legend-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: #ffffff;
+        }
+
+        .legend-text {
+            color: #475569;
+            line-height: 1.7;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Stack MLOps - Plataforma Unificada de IA e ML</h1>
+            <p>Visão arquitetural das principais ferramentas MLOps open source organizadas por camadas</p>
+        </header>
+
+        <div class="legend">
+            <div class="legend-title">
+                <span class="legend-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                </span>
+                Como usar
+            </div>
+            <div class="legend-text">
+                Esta visualização organiza as principais ferramentas MLOps open source em camadas arquiteturais.
+                Clique em qualquer ferramenta para ver detalhes completos incluindo métricas, casos de uso,
+                diferenciais e quando usar cada uma.
+            </div>
+        </div>
+
+        <div class="stack">
+            <!-- Camada 1: Interface e Desenvolvimento -->
+            <div class="layer layer-1">
+                <div class="layer-header">
+                    <div class="layer-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+                    </div>
+                    <div class="layer-title">Camada de Interface e Desenvolvimento</div>
+                </div>
+                <div class="categories">
+                    <div class="category">
+                        <div class="category-name">IDEs e Notebooks</div>
+                        <div class="tools">
+                            <span class="tool-badge" data-tool="jupyterlab">JupyterLab</span>
+                            <span class="tool-badge" data-tool="vscode">VS Code + Jupyter</span>
+                            <span class="tool-badge" data-tool="marimo">Marimo</span>
+                            <span class="tool-badge" data-tool="pluto">Pluto.jl</span>
+                            <span class="tool-badge" data-tool="deepnote">Deepnote</span>
+                        </div>
+                    </div>
+                    <div class="category">
+                        <div class="category-name">Visualização de Dados</div>
+                        <div class="tools">
+                            <span class="tool-badge" data-tool="plotly">Plotly</span>
+                            <span class="tool-badge" data-tool="seaborn">Seaborn</span>
+                            <span class="tool-badge" data-tool="dash">Dash</span>
+                            <span class="tool-badge" data-tool="matplotlib">Matplotlib</span>
+                            <span class="tool-badge" data-tool="altair">Altair</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Camada 2: Fabricação e Otimização -->
+            <div class="layer layer-2">
+                <div class="layer-header">
+                    <div class="layer-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                    </div>
+                    <div class="layer-title">Camada de Fabricação e Otimização</div>
+                </div>
+                <div class="categories">
+                    <div class="category">
+                        <div class="category-name">AutoML</div>
+                        <div class="tools">
+                            <span class="tool-badge" data-tool="ludwig">Ludwig</span>
+                            <span class="tool-badge" data-tool="autogluon">AutoGluon</span>
+                            <span class="tool-badge" data-tool="h2o">H2O AutoML</span>
+                            <span class="tool-badge" data-tool="tpot">TPOT</span>
+                            <span class="tool-badge" data-tool="flaml">FLAML</span>
+                        </div>
+                    </div>
+                    <div class="category">
+                        <div class="category-name">Otimização de Hiperparâmetros</div>
+                        <div class="tools">
+                            <span class="tool-badge" data-tool="optuna">Optuna</span>
+                            <span class="tool-badge" data-tool="raytune">Ray Tune</span>
+                            <span class="tool-badge" data-tool="hyperopt">Hyperopt</span>
+                            <span class="tool-badge" data-tool="kerastuner">Keras Tuner</span>
+                            <span class="tool-badge" data-tool="botorch">BoTorch</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Camada 3: Governança e Orquestração -->
+            <div class="layer layer-3">
+                <div class="layer-header">
+                    <div class="layer-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                    </div>
+                    <div class="layer-title">Camada de Governança e Orquestração</div>
+                </div>
+                <div class="categories">
+                    <div class="category">
+                        <div class="category-name">Workflow e Pipeline</div>
+                        <div class="tools">
+                            <span class="tool-badge" data-tool="airflow">Apache Airflow</span>
+                            <span class="tool-badge" data-tool="prefect">Prefect</span>
+                            <span class="tool-badge" data-tool="dagster">Dagster</span>
+                            <span class="tool-badge" data-tool="metaflow">Metaflow</span>
+                            <span class="tool-badge" data-tool="flyte">Flyte</span>
+                        </div>
+                    </div>
+                    <div class="category">
+                        <div class="category-name">Model Registry & Tracking</div>
+                        <div class="tools">
+                            <span class="tool-badge" data-tool="mlflow">MLflow</span>
+                            <span class="tool-badge" data-tool="dvc">DVC</span>
+                            <span class="tool-badge" data-tool="wandb">W&B</span>
+                            <span class="tool-badge" data-tool="aim">Aim</span>
+                            <span class="tool-badge" data-tool="tensorboard">TensorBoard</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Camada 4: Implantação e Observabilidade -->
+            <div class="layer layer-4">
+                <div class="layer-header">
+                    <div class="layer-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.81 14.12L5.64 11.29 8.47 14.12 4.93 17.66C4.45 15.93 3.66 14.33 2.81 14.12M14.88 5.53L12.05 8.36 9.22 5.53 12.76 2C13.79 2.61 14.87 3.04 15.93 3.29M12.05 10.5L14.88 13.33 17.71 10.5 14.88 7.67 12.05 10.5M19.24 4.91L14.88 9.27 17.71 12.1 22.07 7.74C20.76 6.43 19.85 5.58 19.24 4.91M6.83 11.29L9.66 8.46 12.49 11.29 9.66 14.12 6.83 11.29M8.47 15.76L11.3 18.59 7.85 22.04C6.74 21.12 5.63 19.75 5.64 18.59M13.14 18.59L16.96 14.77 19.79 17.6C18.33 18.5 16.74 19.24 15.07 19.79M9.66 16.89L12.49 19.72 15.32 16.89 12.49 14.06 9.66 16.89Z"/></svg>
+                    </div>
+                    <div class="layer-title">Camada de Implantação e Observabilidade</div>
+                </div>
+                <div class="categories">
+                    <div class="category">
+                        <div class="category-name">Inferência e Serviço</div>
+                        <div class="tools">
+                            <span class="tool-badge" data-tool="kserve">KServe</span>
+                            <span class="tool-badge" data-tool="triton">Triton</span>
+                            <span class="tool-badge" data-tool="bentoml">BentoML</span>
+                            <span class="tool-badge" data-tool="torchserve">TorchServe</span>
+                            <span class="tool-badge" data-tool="localai">LocalAI</span>
+                        </div>
+                    </div>
+                    <div class="category">
+                        <div class="category-name">Monitoramento de Modelos</div>
+                        <div class="tools">
+                            <span class="tool-badge" data-tool="evidently">Evidently</span>
+                            <span class="tool-badge" data-tool="deepchecks">Deepchecks</span>
+                            <span class="tool-badge" data-tool="whylogs">whylogs</span>
+                            <span class="tool-badge" data-tool="alibidetect">Alibi Detect</span>
+                            <span class="tool-badge" data-tool="nannyml">NannyML</span>
+                        </div>
+                    </div>
+                    <div class="category">
+                        <div class="category-name">Explicabilidade</div>
+                        <div class="tools">
+                            <span class="tool-badge" data-tool="shap">SHAP</span>
+                            <span class="tool-badge" data-tool="lime">LIME</span>
+                            <span class="tool-badge" data-tool="interpretml">InterpretML</span>
+                            <span class="tool-badge" data-tool="captum">Captum</span>
+                            <span class="tool-badge" data-tool="alibi">Alibi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Camada 5: Dados e Ingestão -->
+            <div class="layer layer-5">
+                <div class="layer-header">
+                    <div class="layer-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 2.24-9 5v8c0 2.76 4.03 5 9 5s9-2.24 9-5V8c0-2.76-4.03-5-9-5zm0 2c3.87 0 7 1.57 7 3s-3.13 3-7 3-7-1.57-7-3 3.13-3 7-3zm-7 5.88C6.61 11.58 9.16 12.5 12 12.5s5.39-.92 7-2.62V11c0 1.43-3.13 3-7 3s-7-1.57-7-3v-1.12zm0 4C6.61 15.58 9.16 16.5 12 16.5s5.39-.92 7-2.62V16c0 1.43-3.13 3-7 3s-7-1.57-7-3v-2.12z"/></svg>
+                    </div>
+                    <div class="layer-title">Camada de Dados e Ingestão</div>
+                </div>
+                <div class="categories">
+                    <div class="category">
+                        <div class="category-name">Conexão e Integração</div>
+                        <div class="tools">
+                            <span class="tool-badge" data-tool="airbyte">Airbyte</span>
+                            <span class="tool-badge" data-tool="debezium">Debezium</span>
+                            <span class="tool-badge" data-tool="kafka">Apache Kafka</span>
+                            <span class="tool-badge" data-tool="flinkcdc">Flink CDC</span>
+                            <span class="tool-badge" data-tool="dlt">dlt</span>
+                        </div>
+                    </div>
+                    <div class="category">
+                        <div class="category-name">Feature Store</div>
+                        <div class="tools">
+                            <span class="tool-badge" data-tool="feast">Feast</span>
+                            <span class="tool-badge" data-tool="hopsworks">Hopsworks</span>
+                            <span class="tool-badge" data-tool="chronon">Chronon</span>
+                            <span class="tool-badge" data-tool="openmldb">OpenMLDB</span>
+                            <span class="tool-badge" data-tool="featureform">Featureform</span>
+                        </div>
+                    </div>
+                    <div class="category">
+                        <div class="category-name">Rotulagem de Dados</div>
+                        <div class="tools">
+                            <span class="tool-badge" data-tool="labelstudio">Label Studio</span>
+                            <span class="tool-badge" data-tool="labelme">LabelMe</span>
+                            <span class="tool-badge" data-tool="cvat">CVAT</span>
+                            <span class="tool-badge" data-tool="doccano">Doccano</span>
+                            <span class="tool-badge" data-tool="argilla">Argilla</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Camada 6: Infraestrutura -->
+            <div class="layer layer-6">
+                <div class="layer-header">
+                    <div class="layer-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 5c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2H0c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2h-4zM4 5h16v11H4V5zm8 14c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
+                    </div>
+                    <div class="layer-title">Camada de Infraestrutura</div>
+                </div>
+                <div class="categories">
+                    <div class="category">
+                        <div class="category-name">Computação Distribuída</div>
+                        <div class="tools">
+                            <span class="tool-badge" data-tool="deepspeed">DeepSpeed</span>
+                            <span class="tool-badge" data-tool="cudf">RAPIDS cuDF</span>
+                            <span class="tool-badge" data-tool="ray">Ray</span>
+                            <span class="tool-badge" data-tool="horovod">Horovod</span>
+                            <span class="tool-badge" data-tool="dali">NVIDIA DALI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="toolModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // Dados das ferramentas
+        const toolsData = {
+            // Camada 1 - Interface
+            jupyterlab: {
+                name: "JupyterLab",
+                category: "IDEs e Notebooks",
+                stars: "15.000+",
+                contributors: "612",
+                license: "BSD-3",
+                description: "JupyterLab é a evolução do Jupyter Notebook e o padrão da indústria para computação científica interativa. Sua arquitetura extensível via extensões permite customização profunda.",
+                whenUse: [
+                    "Ambiente completo para data science (não apenas notebooks)",
+                    "Equipes que compartilham e colaboram em análises",
+                    "Necessita de extensões (Git, debugger, LSP)",
+                    "Executar notebooks localmente ou em servidor",
+                    "Ecossistema maduro com vasto suporte comunitário"
+                ],
+                differentials: [
+                    "Interface tabbed para múltiplos documentos",
+                    "Drag-and-drop para células e notebooks",
+                    "Extensões como jupyterlab-git",
+                    "Debugger visual",
+                    "Integração com kernels diversos (Python, R, Julia)"
+                ]
+            },
+            vscode: {
+                name: "VS Code com Jupyter Extension",
+                category: "IDEs e Notebooks",
+                stars: "180.000+",
+                contributors: "2.322",
+                license: "MIT",
+                description: "VS Code com extensão Jupyter oferece o melhor dos dois mundos: poder de um IDE completo (debugging, Git, IntelliSense) com capacidade interativa de notebooks.",
+                whenUse: [
+                    "IDE completo além de notebooks",
+                    "Codebases que misturam scripts Python e notebooks",
+                    "Debugging robusto com breakpoints",
+                    "Controle de versão Git integrado",
+                    "Remote development (SSH, containers, WSL)"
+                ],
+                differentials: [
+                    "IntelliSense superior",
+                    "Debugging completo em notebooks",
+                    "Integração nativa com Git e GitHub",
+                    "Remote development",
+                    "Vast marketplace de extensões"
+                ]
+            },
+            marimo: {
+                name: "Marimo",
+                category: "IDEs e Notebooks",
+                stars: "18.100+",
+                contributors: "213",
+                license: "Apache 2.0",
+                description: "Marimo inova ao criar notebooks reativos onde células são recalculadas automaticamente quando dependências mudam. Elimina problemas clássicos de notebooks.",
+                whenUse: [
+                    "Notebooks reativos sem problemas de estado oculto",
+                    "Transformar notebooks em apps web interativos",
+                    "Reprodutibilidade garantida",
+                    "Análises compartilhadas como dashboards",
+                    "Experiência de desenvolvedor moderna"
+                ],
+                differentials: [
+                    "Reatividade automática de células",
+                    "Exportação para apps standalone",
+                    "Suporte a Python type checking",
+                    "Notebooks são arquivos Python puros",
+                    "UI moderna com componentes interativos"
+                ]
+            },
+            pluto: {
+                name: "Pluto.jl",
+                category: "IDEs e Notebooks",
+                stars: "5.300+",
+                contributors: "134",
+                license: "MIT",
+                description: "Para usuários de Julia, Pluto.jl oferece notebooks reativos superiores a Jupyter. Células são recalculadas automaticamente quando variáveis mudam.",
+                whenUse: [
+                    "Trabalha com Julia para computação científica",
+                    "Notebooks reativos com recalculação automática",
+                    "Notebooks sempre executáveis",
+                    "Educação/teaching",
+                    "Performance de Julia com interatividade"
+                ],
+                differentials: [
+                    "Reatividade automática única",
+                    "Notebooks são arquivos Julia puros",
+                    "Package manager integrado",
+                    "Visualizações interativas nativas",
+                    "Garantia de reprodutibilidade"
+                ]
+            },
+            deepnote: {
+                name: "Deepnote",
+                category: "IDEs e Notebooks",
+                stars: "2.485",
+                contributors: "15",
+                license: "Apache 2.0",
+                description: "Deepnote é a melhor solução para colaboração em tempo real em notebooks. Múltiplos usuários podem editar simultaneamente como Google Docs.",
+                whenUse: [
+                    "Colaboração em tempo real estilo Google Docs",
+                    "Equipes remotas editando notebooks simultaneamente",
+                    "Integração com bancos de dados e data warehouses",
+                    "Scheduling de notebooks para relatórios",
+                    "Deployment de notebooks como APIs"
+                ],
+                differentials: [
+                    "Colaboração real-time",
+                    "Integração com BigQuery/Snowflake/Redshift",
+                    "Scheduling integrado",
+                    "Versionamento de notebooks",
+                    "Dashboards interativos"
+                ]
+            },
+
+            // Visualização
+            plotly: {
+                name: "Plotly",
+                category: "Visualização",
+                stars: "18.000+",
+                contributors: "N/A",
+                license: "MIT",
+                description: "Plotly oferece gráficos interativos de alta qualidade com API declarativa. Seu diferencial está em interatividade rica e capacidade de criar dashboards via Dash.",
+                whenUse: [
+                    "Gráficos interativos para exploração",
+                    "Criar dashboards web via Dash",
+                    "Exportar gráficos para HTML standalone",
+                    "3D visualizations ou mapas geoespaciais",
+                    "Integração com notebooks"
+                ],
+                differentials: [
+                    "Interatividade rica out-of-the-box",
+                    "Dash para dashboards web",
+                    "Suporte a 3D e geo visualizations",
+                    "Exportação para múltiplos formatos",
+                    "Temas customizáveis"
+                ]
+            },
+            seaborn: {
+                name: "Seaborn",
+                category: "Visualização",
+                stars: "14.000+",
+                contributors: "N/A",
+                license: "BSD-3",
+                description: "Seaborn é construído sobre Matplotlib e oferece API de alto nível para gráficos estatísticos com defaults bonitos.",
+                whenUse: [
+                    "Gráficos estatísticos rapidamente",
+                    "Análise exploratória de datasets tabulares",
+                    "Visualizações de correlações e distribuições",
+                    "Gráficos publication-ready",
+                    "Trabalha com pandas DataFrames"
+                ],
+                differentials: [
+                    "API de alto nível para estatística",
+                    "Temas elegantes built-in",
+                    "Integração nativa com pandas",
+                    "Funções especializadas (jointplot, pairplot)",
+                    "Suporte a categorical data"
+                ]
+            },
+            dash: {
+                name: "Dash",
+                category: "Visualização",
+                stars: "24.000+",
+                contributors: "N/A",
+                license: "MIT",
+                description: "Dash permite criar dashboards web interativos em Python puro, sem JavaScript. Oferece reactive callbacks.",
+                whenUse: [
+                    "Dashboards web interativos",
+                    "Evitar JavaScript (trabalhar apenas em Python)",
+                    "Componentes customizados",
+                    "Dashboards de produção com autenticação",
+                    "Real-time updates via websockets"
+                ],
+                differentials: [
+                    "Python puro (sem JavaScript)",
+                    "Callbacks reativos",
+                    "Componentes ricos (dcc, html)",
+                    "Deployment fácil",
+                    "Integração com Plotly"
+                ]
+            },
+            matplotlib: {
+                name: "Matplotlib",
+                category: "Visualização",
+                stars: "22.000+",
+                contributors: "N/A",
+                license: "PSF-based",
+                description: "Matplotlib é a biblioteca de visualização mais madura e flexível do Python. Oferece controle total sobre cada elemento do gráfico.",
+                whenUse: [
+                    "Controle total sobre cada elemento visual",
+                    "Pesquisa com gráficos publication-quality",
+                    "Integração com LaTeX",
+                    "Criar animações complexas",
+                    "Formatos de output diversos"
+                ],
+                differentials: [
+                    "Controle fino sobre estilo e layout",
+                    "Suporte a múltiplos backends",
+                    "Integração com LaTeX",
+                    "Animações via FuncAnimation",
+                    "Base para outras bibliotecas"
+                ]
+            },
+            altair: {
+                name: "Altair",
+                category: "Visualização",
+                stars: "10.000+",
+                contributors: "N/A",
+                license: "BSD-3",
+                description: "Altair usa gramática de gráficos com API declarativa elegante. Oferece composição de visualizações complexas e interatividade automática.",
+                whenUse: [
+                    "API declarativa",
+                    "Compor visualizações complexas",
+                    "Interatividade automática",
+                    "Vega-Lite para web rendering",
+                    "Gráficos reproduzíveis via JSON"
+                ],
+                differentials: [
+                    "Grammar of graphics elegante",
+                    "Composição de multi-view visualizations",
+                    "Interatividade automática",
+                    "Exportação para Vega-Lite JSON",
+                    "Integração com notebooks"
+                ]
+            },
+
+            // Camada 2 - Fabricação
+            ludwig: {
+                name: "Ludwig",
+                category: "AutoML",
+                stars: "11.600+",
+                contributors: "154",
+                license: "Apache 2.0",
+                description: "Ludwig se destaca por sua abordagem declarativa (YAML) que permite treinar modelos deep learning sem código. Forte em problemas multimodais.",
+                whenUse: [
+                    "Problemas multimodais (múltiplos tipos de dados)",
+                    "Fine-tuning de LLMs sem complexidade",
+                    "Experimentar arquiteturas via configuração",
+                    "Escalonamento distribuído com Ray/Horovod",
+                    "Seq2seq, forecasting, multi-task learning"
+                ],
+                differentials: [
+                    "Configuração declarativa via YAML",
+                    "Suporte multimodal nativo",
+                    "Integração com HuggingFace",
+                    "Hyperparameter optimization automático",
+                    "Exportação para serving otimizado"
+                ]
+            },
+            autogluon: {
+                name: "AutoGluon",
+                category: "AutoML",
+                stars: "9.700+",
+                contributors: "141",
+                license: "Apache 2.0",
+                description: "Desenvolvido pela AWS, AutoGluon oferece state-of-the-art performance out-of-the-box. Forte em ensembling inteligente.",
+                whenUse: [
+                    "State-of-the-art performance com mínimo esforço",
+                    "Dados tabulares complexos",
+                    "AutoML para múltiplos tipos de dados",
+                    "Ensembling automático",
+                    "Previsão de séries temporais"
+                ],
+                differentials: [
+                    "Multi-layer stacking",
+                    "Preprocessamento automático robusto",
+                    "Suporte a GPUs",
+                    "Time series forecasting",
+                    "Modelo de features customizável"
+                ]
+            },
+            h2o: {
+                name: "H2O AutoML",
+                category: "AutoML",
+                stars: "7.500+",
+                contributors: "183",
+                license: "Apache 2.0",
+                description: "H2O AutoML é ideal para ambientes corporativos com escalabilidade e integração enterprise. Forte em modelos clássicos.",
+                whenUse: [
+                    "Ambiente corporativo com Hadoop/Spark",
+                    "Escalabilidade para datasets grandes",
+                    "Modelos explicáveis",
+                    "Dados tabulares estruturados",
+                    "Integração Java/Scala"
+                ],
+                differentials: [
+                    "Execução distribuída em clusters",
+                    "Leaderboard automático",
+                    "Explicabilidade integrada",
+                    "Exportação para MOJO",
+                    "Integração com Spark/Hadoop"
+                ]
+            },
+            tpot: {
+                name: "TPOT",
+                category: "AutoML",
+                stars: "10.000+",
+                contributors: "9",
+                license: "LGPL-3.0",
+                description: "TPOT usa programação genética para evoluir pipelines completos. Exporta código Python limpo.",
+                whenUse: [
+                    "Descobrir pipelines via algoritmo genético",
+                    "Feature engineering automático",
+                    "Código Python exportável",
+                    "Dados tabulares",
+                    "Tempo computacional disponível"
+                ],
+                differentials: [
+                    "Algoritmo genético",
+                    "Exportação de código Python limpo",
+                    "Busca multi-objetivo",
+                    "Integração com Dask",
+                    "Operadores customizados"
+                ]
+            },
+            flaml: {
+                name: "FLAML",
+                category: "AutoML",
+                stars: "4.262",
+                contributors: "100",
+                license: "MIT",
+                description: "Desenvolvido pela Microsoft, FLAML foca em eficiência computacional com Cost-Frugal Optimization.",
+                whenUse: [
+                    "Restrições computacionais",
+                    "AutoML rápido com boa performance",
+                    "Time series forecasting",
+                    "Tuning de LLMs",
+                    "Integração com MLflow"
+                ],
+                differentials: [
+                    "Cost-Frugal Optimization",
+                    "Time series e ranking tasks",
+                    "Tuning de LLMs e prompts",
+                    "Estimators customizados",
+                    "Zero-shot AutoML"
+                ]
+            },
+
+            // HPO
+            optuna: {
+                name: "Optuna",
+                category: "HPO",
+                stars: "13.300+",
+                contributors: "303",
+                license: "MIT",
+                description: "Optuna é a biblioteca HPO mais moderna e flexível. Abordagem define-by-run permite espaços de busca dinâmicos.",
+                whenUse: [
+                    "Espaços de busca dinâmicos",
+                    "Deep learning com pruning",
+                    "Paralelização eficiente",
+                    "Visualização integrada",
+                    "Study management"
+                ],
+                differentials: [
+                    "Define-by-run para flexibilidade",
+                    "Pruning algorithms",
+                    "Multi-objective optimization",
+                    "Integração com frameworks",
+                    "Dashboard web integrado"
+                ]
+            },
+            raytune: {
+                name: "Ray Tune",
+                category: "HPO",
+                stars: "31.700+ (Ray)",
+                contributors: "303+",
+                license: "Apache 2.0",
+                description: "Ray Tune é ideal para HPO escalável em clusters distribuídos. Integração profunda com Ray.",
+                whenUse: [
+                    "Usa Ray para computação distribuída",
+                    "Escalabilidade para centenas de trials",
+                    "Treinamento com GPUs",
+                    "Population Based Training",
+                    "Fault tolerance"
+                ],
+                differentials: [
+                    "Escalabilidade via Ray",
+                    "Population Based Training",
+                    "Integração com TensorBoard/MLflow/W&B",
+                    "Schedulers avançados (ASHA, HyperBand)",
+                    "Checkpointing"
+                ]
+            },
+            hyperopt: {
+                name: "Hyperopt",
+                category: "HPO",
+                stars: "7.600+",
+                contributors: "101",
+                license: "BSD",
+                description: "Hyperopt é biblioteca clássica e battle-tested para otimização Bayesiana. Algoritmo TPE eficiente.",
+                whenUse: [
+                    "Otimização Bayesiana clássica",
+                    "Espaços de busca hierárquicos",
+                    "Paralelização via Spark",
+                    "Prefere maturidade",
+                    "Modelos scikit-learn, XGBoost, LightGBM"
+                ],
+                differentials: [
+                    "TPE algorithm robusto",
+                    "Espaços hierárquicos",
+                    "Integração com MongoDB",
+                    "Support para Spark",
+                    "API simples"
+                ]
+            },
+            kerastuner: {
+                name: "Keras Tuner",
+                category: "HPO",
+                stars: "2.916",
+                contributors: "61",
+                license: "Apache 2.0",
+                description: "Para usuários Keras/TensorFlow, Keras Tuner oferece integração nativa e simplicidade.",
+                whenUse: [
+                    "Trabalha com Keras/TensorFlow",
+                    "Busca de arquitetura neural",
+                    "Integração com callbacks",
+                    "Hyperband para early stopping",
+                    "Modelos de visão ou NLP"
+                ],
+                differentials: [
+                    "Integração nativa com Keras",
+                    "HyperModel para arquiteturas",
+                    "Multi-objective optimization",
+                    "Integração com TensorBoard",
+                    "Múltiplos tuners"
+                ]
+            },
+            botorch: {
+                name: "BoTorch",
+                category: "HPO",
+                stars: "3.440",
+                contributors: "119",
+                license: "MIT",
+                description: "BoTorch é state-of-the-art para otimização Bayesiana baseada em PyTorch. Flexibilidade para pesquisa.",
+                whenUse: [
+                    "Otimização Bayesiana de última geração",
+                    "Problemas complexos (multi-objective, constrained)",
+                    "Customização profunda",
+                    "Usar GPUs",
+                    "Pesquisa com algoritmos cutting-edge"
+                ],
+                differentials: [
+                    "Baseado em PyTorch",
+                    "Multi-objective constrained optimization",
+                    "Acquisition functions customizáveis",
+                    "Integração com GPyTorch",
+                    "Modular para extensões"
+                ]
+            },
+
+            // Camada 3 - Governança
+            airflow: {
+                name: "Apache Airflow",
+                category: "Workflow e Pipeline",
+                stars: "43.800+",
+                contributors: "16.200",
+                license: "Apache 2.0",
+                description: "Airflow é o padrão de facto para orquestração de workflows em data engineering. Maturidade e flexibilidade Python.",
+                whenUse: [
+                    "Pipelines complexos com múltiplas dependências",
+                    "Agendamento e monitoramento de SLAs",
+                    "Ecossistema diversificado",
+                    "Expertise em Python",
+                    "UI rica para visualização"
+                ],
+                differentials: [
+                    "Executor Kubernetes",
+                    "Integração com OpenLineage",
+                    "Dynamic DAG generation",
+                    "Ecossistema maduro",
+                    "Centenas de operadores"
+                ]
+            },
+            prefect: {
+                name: "Prefect",
+                category: "Workflow e Pipeline",
+                stars: "21.300+",
+                contributors: "383",
+                license: "Apache 2.0",
+                description: "Prefect representa evolução do Airflow com foco em developer experience. Python nativo sem restrições DAG.",
+                whenUse: [
+                    "Flexibilidade sobre convenções",
+                    "Workflows dinâmicos em runtime",
+                    "Debugging e desenvolvimento local simples",
+                    "Retry strategies sofisticadas",
+                    "Infraestrutura moderna"
+                ],
+                differentials: [
+                    "Modelo flexível (não apenas DAG)",
+                    "Desenvolvimento local sem overhead",
+                    "UI moderna",
+                    "Integração com dbt",
+                    "Python nativo"
+                ]
+            },
+            dagster: {
+                name: "Dagster",
+                category: "Workflow e Pipeline",
+                stars: "14.700+",
+                contributors: "611",
+                license: "Apache 2.0",
+                description: "Dagster inova com conceito de data assets. Facilita data lineage, teste e validação.",
+                whenUse: [
+                    "Data lineage integrado",
+                    "Data lakehouse",
+                    "Validações de qualidade",
+                    "Separação lógica/orquestração",
+                    "Integração com dbt, Spark"
+                ],
+                differentials: [
+                    "Software-defined assets (SDAs)",
+                    "Type system para validação",
+                    "Integração nativa com dbt",
+                    "Scheduler baseado em sensores",
+                    "UI focada em assets"
+                ]
+            },
+            metaflow: {
+                name: "Metaflow",
+                category: "Workflow e Pipeline",
+                stars: "9.700+",
+                contributors: "127",
+                license: "Apache 2.0",
+                description: "Desenvolvido pela Netflix, Metaflow foca na experiência do cientista de dados. Transição transparente de notebook para produção.",
+                whenUse: [
+                    "Transição de notebooks para produção",
+                    "Versionamento automático",
+                    "AWS ou Kubernetes",
+                    "Equipe de cientistas de dados",
+                    "Paralelização fácil"
+                ],
+                differentials: [
+                    "Versionamento automático",
+                    "Artifact tracking integrado",
+                    "Branching de workflows",
+                    "Integração com AWS Step Functions",
+                    "Decorator-based approach"
+                ]
+            },
+            flyte: {
+                name: "Flyte",
+                category: "Workflow e Pipeline",
+                stars: "6.700+",
+                contributors: "310",
+                license: "Apache 2.0",
+                description: "Flyte combina forte tipagem, reprodutibilidade via containerização e escalabilidade Kubernetes-native.",
+                whenUse: [
+                    "Type safety",
+                    "Reprodutibilidade via containers",
+                    "Workflows ML de longa duração",
+                    "Versionamento e rollback",
+                    "Memoização"
+                ],
+                differentials: [
+                    "Type system forte",
+                    "Containerização automática",
+                    "Dynamic workflows",
+                    "Integração com Spark, Ray",
+                    "Memoização integrada"
+                ]
+            },
+
+            // Model Registry & Tracking
+            mlflow: {
+                name: "MLflow",
+                category: "Model Registry & Tracking",
+                stars: "23.600+",
+                contributors: "942",
+                license: "Apache 2.0",
+                description: "MLflow é a solução mais madura para ciclo de vida completo de ML. Model registry robusto e formato unificado.",
+                whenUse: [
+                    "Solução completa (tracking, registry, deployment)",
+                    "Múltiplos frameworks",
+                    "Model registry com governança",
+                    "Comparação visual de experimentos",
+                    "Grande ecossistema"
+                ],
+                differentials: [
+                    "MLModel format para portabilidade",
+                    "Model signatures",
+                    "UI rica",
+                    "Plugins para deploy",
+                    "Transições de estágio"
+                ]
+            },
+            dvc: {
+                name: "DVC (Data Version Control)",
+                category: "Model Registry & Tracking",
+                stars: "15.200+",
+                contributors: "295",
+                license: "Apache 2.0",
+                description: "DVC se destaca por tratar dados como código. Integração profunda com Git para versionar datasets grandes.",
+                whenUse: [
+                    "Datasets grandes",
+                    "Data lineage completo",
+                    "CI/CD para ML",
+                    "Equipes distribuídas",
+                    "Abordagem Git-native"
+                ],
+                differentials: [
+                    "Git-based versioning",
+                    "Pipeline DAGs",
+                    "DVC Studio",
+                    "Integração com VS Code",
+                    "Remotes (S3, GCS, Azure)"
+                ]
+            },
+            wandb: {
+                name: "Weights & Biases (W&B)",
+                category: "Model Registry & Tracking",
+                stars: "10.700+",
+                contributors: "218",
+                license: "MIT",
+                description: "W&B oferece melhor experiência de usuário para experiment tracking. Dashboards interativos superiores.",
+                whenUse: [
+                    "Visualização rica",
+                    "Logging automático de sistema",
+                    "Compartilhar experimentos",
+                    "Sweep de hiperparâmetros integrado",
+                    "Integração com HuggingFace, PyTorch Lightning"
+                ],
+                differentials: [
+                    "Dashboard interativo superior",
+                    "Artifact tracking com lineage",
+                    "Report generation",
+                    "Integração profunda",
+                    "Sweep integrado"
+                ]
+            },
+            aim: {
+                name: "Aim",
+                category: "Model Registry & Tracking",
+                stars: "5.900+",
+                contributors: "83",
+                license: "Apache 2.0",
+                description: "Aim é alternativa open source pura a W&B. Performance com milhares de runs e UI moderna.",
+                whenUse: [
+                    "Solução 100% self-hosted",
+                    "Grande volume de experimentos",
+                    "UI explorável",
+                    "Performance superior",
+                    "Simplicidade de setup"
+                ],
+                differentials: [
+                    "Query language poderosa",
+                    "Explorability via grouping",
+                    "Integração com Optuna",
+                    "Performance em datasets grandes",
+                    "Sem limitações cloud"
+                ]
+            },
+            tensorboard: {
+                name: "TensorBoard",
+                category: "Model Registry & Tracking",
+                stars: "7.100+",
+                contributors: "244",
+                license: "Apache 2.0",
+                description: "TensorBoard continua sendo escolha para ecossistema TensorFlow/Keras. Profiling detalhado de modelos.",
+                whenUse: [
+                    "TensorFlow/Keras",
+                    "Profiling detalhado",
+                    "Visualizar arquitetura de redes",
+                    "Embedding projector",
+                    "Research com análise profunda"
+                ],
+                differentials: [
+                    "Graph visualization",
+                    "Profiler integrado",
+                    "Embedding projector com UMAP/t-SNE",
+                    "Histogramas de distribuição",
+                    "Integração nativa TF"
+                ]
+            },
+
+            // Camada 4 - Implantação
+            kserve: {
+                name: "KServe",
+                category: "Inferência",
+                stars: "5.000+",
+                contributors: "318",
+                license: "Apache 2.0",
+                description: "KServe é escolha ideal para Kubernetes com recursos avançados de produção. Auto-scaling com scale-to-zero.",
+                whenUse: [
+                    "Infraestrutura Kubernetes",
+                    "Auto-scaling inteligente",
+                    "Deploy gradual (canary, blue-green)",
+                    "Múltiplos frameworks",
+                    "Monitoramento integrado"
+                ],
+                differentials: [
+                    "Arquitetura serverless com Knative",
+                    "Suporte a vLLM",
+                    "Detecção de drift integrada",
+                    "InferenceGraph para pipelines",
+                    "Scale-to-zero"
+                ]
+            },
+            triton: {
+                name: "Triton Inference Server",
+                category: "Inferência",
+                stars: "10.200+",
+                contributors: "140",
+                license: "BSD-3",
+                description: "Quando performance é crítica, Triton é imbatível. Otimizações NVIDIA e técnicas avançadas como dynamic batching.",
+                whenUse: [
+                    "Performance e throughput prioritários",
+                    "GPUs NVIDIA",
+                    "Servir múltiplos modelos",
+                    "Modelos otimizados (TensorRT, ONNX)",
+                    "Métricas via Prometheus"
+                ],
+                differentials: [
+                    "Dynamic batching inteligente",
+                    "Ensemble de modelos",
+                    "BLS para pipelines customizados",
+                    "Otimizações de hardware",
+                    "Concurrent model execution"
+                ]
+            },
+            bentoml: {
+                name: "BentoML",
+                category: "Inferência",
+                stars: "8.400+",
+                contributors: "232",
+                license: "Apache 2.0",
+                description: "BentoML se destaca pela experiência Python-first. Empacotar modelos como APIs com poucas linhas.",
+                whenUse: [
+                    "Velocidade de desenvolvimento",
+                    "Equipe Python",
+                    "Pipelines multi-model",
+                    "Containers Docker otimizados",
+                    "Batching adaptativo"
+                ],
+                differentials: [
+                    "Adaptive batching automático",
+                    "Suporte nativo a LLMs",
+                    "Model runner para isolamento",
+                    "Integração com BentoCloud",
+                    "Python-first approach"
+                ]
+            },
+            torchserve: {
+                name: "TorchServe",
+                category: "Inferência",
+                stars: "4.357",
+                contributors: "196",
+                license: "Apache 2.0",
+                description: "Para ecossistema PyTorch, TorchServe é escolha natural. Integração profunda e handlers customizados.",
+                whenUse: [
+                    "Modelos PyTorch exclusivamente",
+                    "Handlers customizados",
+                    "TorchScript",
+                    "Métricas via Prometheus",
+                    "Migração de pesquisa para produção"
+                ],
+                differentials: [
+                    "Integração com PyTorch Lightning",
+                    "Suporte a captum",
+                    "Model archiver",
+                    "A/B testing via configuração",
+                    "Handlers customizados"
+                ]
+            },
+            localai: {
+                name: "LocalAI",
+                category: "Inferência",
+                stars: "41.100+",
+                contributors: "168",
+                license: "MIT",
+                description: "LocalAI é perfeito para privacidade, edge computing ou uso local de LLMs. API compatível com OpenAI.",
+                whenUse: [
+                    "Rodar LLMs localmente",
+                    "Ambientes edge ou offline",
+                    "Compatibilidade com OpenAI API",
+                    "Modelos multimodais",
+                    "Restrições de custo"
+                ],
+                differentials: [
+                    "Compatibilidade OpenAI API",
+                    "Suporte a hardware variado",
+                    "Múltiplos backends otimizados",
+                    "Modelos quantizados",
+                    "Sem vendor lock-in"
+                ]
+            },
+
+            // Monitoramento
+            evidently: {
+                name: "Evidently",
+                category: "Monitoramento",
+                stars: "7.000+",
+                contributors: "87",
+                license: "Apache 2.0",
+                description: "Evidently oferece melhor UX para monitoramento. Reports HTML informativos e visuais.",
+                whenUse: [
+                    "Reports visuais para stakeholders",
+                    "Monitorar data drift",
+                    "Dados tabulares ou texto",
+                    "Dashboard self-hosted",
+                    "Testes de qualidade automatizados"
+                ],
+                differentials: [
+                    "Reports HTML ricos",
+                    "Dashboard interativo",
+                    "Presets para casos de uso",
+                    "Integração Grafana/Prometheus",
+                    "Suporte a LLMs"
+                ]
+            },
+            deepchecks: {
+                name: "Deepchecks",
+                category: "Monitoramento",
+                stars: "3.959",
+                contributors: "53",
+                license: "AGPL-3.0",
+                description: "Deepchecks foca em validação contínua com checks configuráveis. Suites para diferentes fases.",
+                whenUse: [
+                    "Validação automática em CI/CD",
+                    "Alertas configuráveis",
+                    "Suites de checks customizadas",
+                    "Dashboard com histórico",
+                    "Análise de causas root"
+                ],
+                differentials: [
+                    "Checks configuráveis",
+                    "Alertas e notificações",
+                    "Dashboard com histórico",
+                    "Análise de causas",
+                    "Integração com frameworks ML"
+                ]
+            },
+            whylogs: {
+                name: "whylogs",
+                category: "Monitoramento",
+                stars: "2.788",
+                contributors: "39",
+                license: "Apache 2.0",
+                description: "whylogs usa statistical profiles leves (data sketches). Eficiência de armazenamento e privacidade.",
+                whenUse: [
+                    "Restrições de privacidade",
+                    "Datasets massivos",
+                    "Profiles estatísticos leves",
+                    "Integração com Spark",
+                    "Comparação de profiles"
+                ],
+                differentials: [
+                    "Statistical profiles compactos",
+                    "Privacy-preserving",
+                    "Integração com Spark",
+                    "whylogs Platform",
+                    "Suporte a streaming"
+                ]
+            },
+            alibidetect: {
+                name: "Alibi Detect",
+                category: "Monitoramento",
+                stars: "2.476",
+                contributors: "27",
+                license: "BSL 1.1",
+                description: "Alibi Detect oferece detectores avançados baseados em research. Suporta dados não-tabulares.",
+                whenUse: [
+                    "Detectores state-of-the-art",
+                    "Imagens ou texto",
+                    "Detecção de adversarial examples",
+                    "Detectores online e offline",
+                    "Múltiplos algoritmos"
+                ],
+                differentials: [
+                    "Detectores baseados em research",
+                    "Dados não-tabulares",
+                    "Adversarial detection",
+                    "Drift detection para LLMs",
+                    "Integração Seldon/KServe"
+                ]
+            },
+            nannyml: {
+                name: "NannyML",
+                category: "Monitoramento",
+                stars: "2.121",
+                contributors: "32",
+                license: "Apache 2.0",
+                description: "NannyML se destaca em performance estimation sem labels ground-truth. CBPE algorithm.",
+                whenUse: [
+                    "Delay em labels",
+                    "Estimar performance sem labels",
+                    "Dados tabulares",
+                    "Análise de causas",
+                    "Visualizações interativas"
+                ],
+                differentials: [
+                    "Performance estimation sem labels",
+                    "CBPE algorithm",
+                    "Ranking de features",
+                    "Visualizações interativas",
+                    "Integração com pipelines Python"
+                ]
+            },
+
+            // Explicabilidade
+            shap: {
+                name: "SHAP",
+                category: "Explicabilidade",
+                stars: "24.900+",
+                contributors: "243",
+                license: "MIT",
+                description: "SHAP é padrão de facto para explicabilidade. Baseado em teoria de jogos (Shapley values).",
+                whenUse: [
+                    "Explicações com fundamentação teórica",
+                    "Múltiplos tipos de modelos",
+                    "Explicações local e global",
+                    "Visualizações ricas",
+                    "Compliance/regulatório"
+                ],
+                differentials: [
+                    "Base em Shapley values",
+                    "Múltiplos explainers otimizados",
+                    "Visualizações ricas",
+                    "Suporte tabular/imagem/texto",
+                    "Integração com frameworks"
+                ]
+            },
+            lime: {
+                name: "LIME",
+                category: "Explicabilidade",
+                stars: "12.100+",
+                contributors: "45",
+                license: "BSD-2",
+                description: "LIME explica predições via aproximação local com modelo interpretável. Model-agnostic e intuitivo.",
+                whenUse: [
+                    "Explicar predições individuais",
+                    "Modelos black-box",
+                    "Explicações intuitivas",
+                    "Dados tabulares, texto ou imagens",
+                    "Método model-agnostic simples"
+                ],
+                differentials: [
+                    "Model-agnostic completo",
+                    "Explicações locais intuitivas",
+                    "Múltiplos tipos de dados",
+                    "Visualizações claras",
+                    "Simplicidade de uso"
+                ]
+            },
+            interpretml: {
+                name: "InterpretML",
+                category: "Explicabilidade",
+                stars: "6.800+",
+                contributors: "47",
+                license: "MIT",
+                description: "InterpretML oferece modelos interpretáveis intrinsecamente (glassbox) e explainers. EBM se destaca.",
+                whenUse: [
+                    "Modelos intrinsecamente interpretáveis",
+                    "Accuracy comparável a XGBoost",
+                    "Dados tabulares",
+                    "Dashboard unificado",
+                    "Explicações global e local"
+                ],
+                differentials: [
+                    "EBM (state-of-the-art glassbox)",
+                    "Dashboard unificado",
+                    "Glassbox e blackbox explainers",
+                    "Visualizações interativas",
+                    "Integração scikit-learn"
+                ]
+            },
+            captum: {
+                name: "Captum",
+                category: "Explicabilidade",
+                stars: "5.500+",
+                contributors: "119",
+                license: "BSD-3",
+                description: "Captum é especializado em explicabilidade para PyTorch. Métodos baseados em gradientes.",
+                whenUse: [
+                    "PyTorch exclusivamente",
+                    "Métodos baseados em gradientes",
+                    "Visão computacional",
+                    "Explicar attention em NLP",
+                    "Influence functions"
+                ],
+                differentials: [
+                    "Otimizado para PyTorch",
+                    "Métodos baseados em gradientes",
+                    "Integrated Gradients",
+                    "Saliency maps",
+                    "Influence functions"
+                ]
+            },
+            alibi: {
+                name: "Alibi",
+                category: "Explicabilidade",
+                stars: "2.606",
+                contributors: "22",
+                license: "BSL 1.1",
+                description: "Alibi oferece técnicas avançadas além de feature importance. Counterfactual explanations e anchors.",
+                whenUse: [
+                    "Counterfactuals",
+                    "Anchors (regras)",
+                    "Casos de compliance",
+                    "Métodos model-agnostic e specific",
+                    "Prototypes e similarity"
+                ],
+                differentials: [
+                    "Counterfactual explanations",
+                    "Anchors para regras",
+                    "Métodos avançados",
+                    "Múltiplos tipos de dados",
+                    "Integração Seldon"
+                ]
+            },
+
+            // Camada 5 - Dados
+            airbyte: {
+                name: "Airbyte",
+                category: "Conexão e Integração",
+                stars: "20.400+",
+                contributors: "1.138",
+                license: "ELv2",
+                description: "Airbyte é plataforma ELT moderna com maior número de conectores (350+). Facilidade de criar conectores via CDK.",
+                whenUse: [
+                    "Integrar múltiplas fontes",
+                    "UI para configuração low-code",
+                    "Sincronização incremental com CDC",
+                    "Data warehouses modernos",
+                    "Scheduling e orquestração"
+                ],
+                differentials: [
+                    "350+ conectores",
+                    "Connector Development Kit",
+                    "UI intuitiva",
+                    "Normalization integrada",
+                    "Suporte a dbt"
+                ]
+            },
+            debezium: {
+                name: "Debezium",
+                category: "Conexão e Integração",
+                stars: "12.300+",
+                contributors: "627",
+                license: "Apache 2.0",
+                description: "Debezium é padrão para Change Data Capture (CDC) em tempo real. Monitora bancos e emite eventos via Kafka.",
+                whenUse: [
+                    "CDC em tempo real",
+                    "Arquitetura event-driven",
+                    "Streaming para Kafka",
+                    "Capturar deletes/updates",
+                    "Exactly-once semantics"
+                ],
+                differentials: [
+                    "CDC nativo com transaction log",
+                    "Múltiplos bancos",
+                    "Integração Kafka Connect",
+                    "Snapshot inicial",
+                    "Transformações via SMT"
+                ]
+            },
+            kafka: {
+                name: "Apache Kafka",
+                category: "Conexão e Integração",
+                stars: "31.700+",
+                contributors: "1.320",
+                license: "Apache 2.0",
+                description: "Kafka é espinha dorsal para arquiteturas de dados em tempo real. Throughput massivo e durabilidade.",
+                whenUse: [
+                    "Streaming em tempo real",
+                    "Microservices via eventos",
+                    "Replay de dados históricos",
+                    "Desacoplar produtores/consumidores",
+                    "Exactly-once processing"
+                ],
+                differentials: [
+                    "Throughput massivo",
+                    "Retention para replay",
+                    "Kafka Streams",
+                    "Connect framework",
+                    "Ecossistema maduro"
+                ]
+            },
+            flinkcdc: {
+                name: "Apache Flink CDC",
+                category: "Conexão e Integração",
+                stars: "6.300+",
+                contributors: "191",
+                license: "Apache 2.0",
+                description: "Flink CDC oferece CDC declarativo via YAML e execução distribuída via Apache Flink.",
+                whenUse: [
+                    "CDC com transformações complexas",
+                    "Múltiplos bancos sincronizados",
+                    "Exactly-once semantics",
+                    "Pipelines declarativos",
+                    "Escalabilidade via Flink"
+                ],
+                differentials: [
+                    "CDC declarativo via YAML",
+                    "Schema evolution",
+                    "Transformações em pipeline",
+                    "Exactly-once guarantees",
+                    "Integração com data lakes"
+                ]
+            },
+            dlt: {
+                name: "dlt (Data Load Tool)",
+                category: "Conexão e Integração",
+                stars: "4.800+",
+                contributors: "154",
+                license: "Apache 2.0",
+                description: "dlt é biblioteca Python-native para ELT. Automatiza schema evolution e prioriza developer experience.",
+                whenUse: [
+                    "Código Python sobre UI",
+                    "Schema evolution automática",
+                    "APIs REST",
+                    "Integração com orquestradores",
+                    "Verified sources"
+                ],
+                differentials: [
+                    "Python-first approach",
+                    "Schema evolution automática",
+                    "Typing e validation",
+                    "Incremental loading",
+                    "Integração com dbt"
+                ]
+            },
+
+            // Feature Store
+            feast: {
+                name: "Feast",
+                category: "Feature Store",
+                stars: "6.600+",
+                contributors: "321",
+                license: "Apache 2.0",
+                description: "Feast é feature store open source mais maduro. Múltiplos backends e point-in-time correctness.",
+                whenUse: [
+                    "Feature store sem vendor lock-in",
+                    "Infraestrutura diversa",
+                    "Point-in-time correctness",
+                    "Separação offline/online store",
+                    "Feature serving de baixa latência"
+                ],
+                differentials: [
+                    "Point-in-time joins",
+                    "Modular com múltiplos backends",
+                    "Registry para governança",
+                    "Push vs pull model",
+                    "Integração com frameworks ML"
+                ]
+            },
+            hopsworks: {
+                name: "Hopsworks Feature Store",
+                category: "Feature Store",
+                stars: "1.273",
+                contributors: "39",
+                license: "AGPL-3.0",
+                description: "Hopsworks oferece plataforma completa com feature store integrado. Usa lakehouse format (Hudi/Delta).",
+                whenUse: [
+                    "Data lakehouse",
+                    "Time-travel",
+                    "Governança com RBAC",
+                    "Feature validation e monitoring",
+                    "Streaming e batch unificado"
+                ],
+                differentials: [
+                    "Lakehouse-based com ACID",
+                    "Time-travel integrado",
+                    "Feature validation",
+                    "SDKs múltiplos",
+                    "Plataforma completa MLOps"
+                ]
+            },
+            chronon: {
+                name: "Chronon",
+                category: "Feature Store",
+                stars: "955",
+                contributors: "41",
+                license: "Apache 2.0",
+                description: "Chronon (Airbnb/Stripe) resolve feature engineering complexo com joins temporais. Backfills eficientes.",
+                whenUse: [
+                    "Agregações temporais complexas",
+                    "Backfilling eficiente",
+                    "Consistência batch-streaming",
+                    "Eventos de usuário agregados",
+                    "Low-latency serving"
+                ],
+                differentials: [
+                    "Temporal joins com backfilling",
+                    "Batch-streaming consistency",
+                    "DSL para feature definitions",
+                    "Integração Spark/Flink",
+                    "Serving via KV stores"
+                ]
+            },
+            openmldb: {
+                name: "OpenMLDB",
+                category: "Feature Store",
+                stars: "1.675",
+                contributors: "152",
+                license: "Apache 2.0",
+                description: "OpenMLDB é banco SQL especializado para ML. SQL funciona identicamente em batch e real-time.",
+                whenUse: [
+                    "SQL para feature engineering",
+                    "Consistência batch-online absoluta",
+                    "Features com janelas temporais",
+                    "Performance de banco otimizado",
+                    "UDFs customizadas em C++"
+                ],
+                differentials: [
+                    "SQL engine unificado",
+                    "Otimizado para time-series",
+                    "Consistent semantics",
+                    "Suporte a UDFs",
+                    "Deployment flexível"
+                ]
+            },
+            featureform: {
+                name: "Featureform",
+                category: "Feature Store",
+                stars: "1.961",
+                contributors: "29",
+                license: "MPL-2.0",
+                description: "Featureform é virtual feature store que orquestra infraestrutura existente sem mover dados.",
+                whenUse: [
+                    "Não quer mover dados",
+                    "Infraestrutura existente",
+                    "Features-as-code",
+                    "Orquestração multi-sistema",
+                    "Governança sem centralização"
+                ],
+                differentials: [
+                    "Virtual approach",
+                    "Features-as-code",
+                    "Orquestração via Kubernetes",
+                    "Múltiplos backends",
+                    "Versionamento de features"
+                ]
+            },
+
+            // Rotulagem
+            labelstudio: {
+                name: "Label Studio",
+                category: "Rotulagem",
+                stars: "26.100+",
+                contributors: "884",
+                license: "Apache 2.0",
+                description: "Label Studio é plataforma de anotação mais versátil. Suporta todos os tipos de dados com templates configuráveis.",
+                whenUse: [
+                    "Múltiplos tipos de dados",
+                    "Templates customizáveis",
+                    "Active learning",
+                    "Workflow colaborativo",
+                    "Integração com models"
+                ],
+                differentials: [
+                    "Suporte multimodal completo",
+                    "Templates configuráveis via XML",
+                    "ML-assisted labeling",
+                    "Workflow de revisão",
+                    "Integração cloud storage"
+                ]
+            },
+            labelme: {
+                name: "LabelMe",
+                category: "Rotulagem",
+                stars: "15.400+",
+                contributors: "61",
+                license: "GPL-3.0",
+                description: "LabelMe é ferramenta desktop simples para anotação de imagens. Exportação para formatos padrão.",
+                whenUse: [
+                    "Ferramenta offline",
+                    "Projetos pequenos/médios",
+                    "Formas variadas",
+                    "Exportação COCO/Pascal VOC",
+                    "GUI desktop"
+                ],
+                differentials: [
+                    "Desktop app",
+                    "Múltiplas formas geométricas",
+                    "Exportação para formatos padrão",
+                    "JSON human-readable",
+                    "Simplicidade de uso"
+                ]
+            },
+            cvat: {
+                name: "CVAT",
+                category: "Rotulagem",
+                stars: "12.400+",
+                contributors: "281",
+                license: "MIT",
+                description: "CVAT é especializado em visão computacional com suporte a vídeos e tracking temporal.",
+                whenUse: [
+                    "Vídeos com tracking",
+                    "Interpolação temporal",
+                    "Dados 3D (cuboids)",
+                    "Semi-automatic annotation",
+                    "Deployment Docker/Kubernetes"
+                ],
+                differentials: [
+                    "Video annotation com interpolação",
+                    "Tracking temporal",
+                    "Suporte a 3D cuboids",
+                    "Semi-automatic segmentation",
+                    "API REST completa"
+                ]
+            },
+            doccano: {
+                name: "Doccano",
+                category: "Rotulagem",
+                stars: "10.500+",
+                contributors: "85",
+                license: "MIT",
+                description: "Doccano é especializado em anotação de texto para NLP. Suporta classificação, NER e seq2seq.",
+                whenUse: [
+                    "Exclusivamente texto",
+                    "NER, sentiment, classification",
+                    "Interface colaborativa",
+                    "Exportação para formatos NLP",
+                    "Múltiplos idiomas"
+                ],
+                differentials: [
+                    "Especializado em NLP",
+                    "Múltiplas tasks",
+                    "Interface multilingual",
+                    "Formatos NLP padrão",
+                    "Auto-labeling via API"
+                ]
+            },
+            argilla: {
+                name: "Argilla",
+                category: "Rotulagem",
+                stars: "4.807",
+                contributors: "108",
+                license: "Apache 2.0",
+                description: "Argilla é focado em feedback humano para LLMs. Suporte a spans complexos, ranking e rating para RLHF.",
+                whenUse: [
+                    "Fine-tuning de LLMs",
+                    "Feedback humano para RLHF",
+                    "Ranking, rating ou preferências",
+                    "Integração com Hugging Face",
+                    "Annotation com sugestões"
+                ],
+                differentials: [
+                    "Focado em LLMs",
+                    "Suporte a ranking/rating",
+                    "Integração Hugging Face",
+                    "Python SDK",
+                    "Inter-annotator agreement"
+                ]
+            },
+
+            // Camada 6 - Infraestrutura
+            deepspeed: {
+                name: "DeepSpeed",
+                category: "Computação Distribuída",
+                stars: "N/A",
+                contributors: "N/A",
+                license: "Apache 2.0",
+                description: "DeepSpeed é biblioteca líder para treinar modelos massivos (100B+ parâmetros). ZeRO fragmenta estados entre GPUs.",
+                whenUse: [
+                    "Modelos grandes (>1B parâmetros)",
+                    "Otimização de memória agressiva",
+                    "Múltiplas GPUs ou clusters",
+                    "Mixed precision automático",
+                    "3D parallelism"
+                ],
+                differentials: [
+                    "ZeRO para redução de memória",
+                    "Offloading para CPU/NVMe",
+                    "DeepSpeed-FastGen",
+                    "Múltiplas arquiteturas",
+                    "Integração HuggingFace"
+                ]
+            },
+            cudf: {
+                name: "RAPIDS cuDF",
+                category: "Computação Distribuída",
+                stars: "9.500+",
+                contributors: "266",
+                license: "Apache 2.0",
+                description: "cuDF é DataFrame GPU-accelerated com API compatível com pandas. Acelera operações em ordens de magnitude.",
+                whenUse: [
+                    "Datasets grandes em pandas",
+                    "Aceleração GPU para dados",
+                    "Feature engineering intensivo",
+                    "API familiar (pandas)",
+                    "Integração com Dask"
+                ],
+                differentials: [
+                    "API pandas-like",
+                    "Performance 10-100x superior",
+                    "Integração Dask-cuDF",
+                    "Múltiplos formatos",
+                    "Integração com cuML"
+                ]
+            },
+            ray: {
+                name: "Ray",
+                category: "Computação Distribuída",
+                stars: "31.700+",
+                contributors: "N/A",
+                license: "Apache 2.0",
+                description: "Ray é framework de computação distribuída general-purpose. Abstrai complexidade via decorators simples.",
+                whenUse: [
+                    "Escalar código Python para clusters",
+                    "Treinamento distribuído",
+                    "HPO escalável (Ray Tune)",
+                    "Serving com autoscaling (Ray Serve)",
+                    "Framework unificado"
+                ],
+                differentials: [
+                    "API simples (@ray.remote)",
+                    "Ray Train",
+                    "Ray Tune",
+                    "Ray Serve",
+                    "Múltiplos backends"
+                ]
+            },
+            horovod: {
+                name: "Horovod",
+                category: "Computação Distribuída",
+                stars: "14.000+",
+                contributors: "N/A",
+                license: "Apache 2.0",
+                description: "Horovod simplifica treinamento distribuído usando ring-allreduce. Performance em redes InfiniBand.",
+                whenUse: [
+                    "Clusters HPC (InfiniBand)",
+                    "Treinamento data-parallel",
+                    "Mudanças mínimas no código",
+                    "PyTorch, TensorFlow ou MXNet",
+                    "Elastic training"
+                ],
+                differentials: [
+                    "Ring-allreduce eficiente",
+                    "Integração simples",
+                    "Elastic training",
+                    "Timeline profiler",
+                    "Compatibilidade com Spark"
+                ]
+            },
+            dali: {
+                name: "NVIDIA DALI",
+                category: "Computação Distribuída",
+                stars: "5.600+",
+                contributors: "100",
+                license: "Apache 2.0",
+                description: "DALI move preprocessamento de dados para GPU, eliminando gargalo de CPU. Pipelines otimizados.",
+                whenUse: [
+                    "Visão computacional em GPUs",
+                    "GPU subutilizada (CPU-bound)",
+                    "Imagens grandes ou augmentation complexa",
+                    "Throughput máximo",
+                    "Integração com frameworks"
+                ],
+                differentials: [
+                    "Data augmentation na GPU",
+                    "Decodificação acelerada",
+                    "Pipeline otimizado",
+                    "Múltiplas GPUs",
+                    "Integração com frameworks"
+                ]
+            }
+        };
+
+        // Modal
+        const modal = document.getElementById('toolModal');
+        const modalBody = document.getElementById('modalBody');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        // Event listeners para todas as ferramentas
+        document.querySelectorAll('.tool-badge').forEach(badge => {
+            badge.addEventListener('click', function() {
+                const toolId = this.getAttribute('data-tool');
+                showToolDetails(toolId);
+            });
+        });
+
+        function showToolDetails(toolId) {
+            const tool = toolsData[toolId];
+            if (!tool) return;
+
+            const whenUseList = tool.whenUse.map(item => `<li>${item}</li>`).join('');
+            const differentialsList = tool.differentials.map(item => `<li>${item}</li>`).join('');
+
+            modalBody.innerHTML = `
+                <div class="modal-header">
+                    <h2 class="modal-title">${tool.name}</h2>
+                    <span class="badge">${tool.category}</span>
+                </div>
+
+                <div class="modal-metrics">
+                    <div class="metric">
+                        <div class="metric-value">⭐ ${tool.stars}</div>
+                        <div class="metric-label">Estrelas</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">👥 ${tool.contributors}</div>
+                        <div class="metric-label">Contribuidores</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">📜 ${tool.license}</div>
+                        <div class="metric-label">Licença</div>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3>📝 Descrição</h3>
+                    <p>${tool.description}</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>✅ Quando Usar</h3>
+                    <ul>${whenUseList}</ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>💎 Diferenciais</h3>
+                    <ul>${differentialsList}</ul>
+                </div>
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.style.display === 'block') {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
